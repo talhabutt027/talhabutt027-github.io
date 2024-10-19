@@ -1,0 +1,21 @@
+def count_emails_from_file(fname):
+    # Error handling
+    try:
+        fhand = open(fname)
+    except FileNotFoundError:
+        print('Error: file not found!')
+        return
+    #   Creating a dictionary
+    v_count = dict()
+    for line in fhand:
+        if line.startswith('From '):
+            line = line.split()
+            v_email = line[1]
+            v_count[v_email] = v_count.get(v_email, 0) + 1
+
+    for key, value in v_count.items():
+        print('====>', end='  ')
+        print(f'{key:<30}  {value}')
+
+fname = input('Enter a file name: ')
+count_emails_from_file(fname)
